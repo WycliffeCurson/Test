@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Profile</h1>
+        <p id="userInfo">Loading user data...</p>
+        <button class="btn logout-btn" onclick="logout()">Log Out</button>
+        <a href="index.html" class="back">← Back to Home</a>
+    </div>
+
+    <script>
+        // Load user data from localStorage
+        function loadProfile() {
+            let loggedInUser = localStorage.getItem("loggedInUser");
+
+            if (!loggedInUser) {
+                alert("No user logged in. Redirecting to sign-in.");
+                window.location.href = "signin.html";
+                return;
+            }
+
+            let userData = JSON.parse(localStorage.getItem(loggedInUser));
+
+            if (userData) {
+                document.getElementById("userInfo").innerHTML = 
+                    `<strong>Name:</strong> ${userData.fullName} <br> <strong>Email:</strong> ${userData.email}`;
+            } else {
+                alert("User data not found. Redirecting to sign-in.");
+                window.location.href = "signin.html";
+            }
+        }
+
+        // Logout function
+        function logout() {
+            localStorage.removeItem("loggedInUser");
+            alert("Logged out successfully!");
+            window.location.href = "signin.html";
+        }
+
+        // Load profile when the page is loaded
+        window.onload = loadProfile;
+    </script>
+</body>
+</html>
