@@ -9,14 +9,31 @@
 <body>
     <div class="container">
         <h1>Sign Up</h1>
-        <form>
-            <input type="text" placeholder="Full Name" required>
-            <input type="email" placeholder="Email" required>
-            <input type="password" placeholder="Password" required>
+        <form onsubmit="signup(event)">
+            <input type="text" id="fullName" placeholder="Full Name" required>
+            <input type="email" id="email" placeholder="Email" required>
+            <input type="password" id="password" placeholder="Password" required>
             <button type="submit" class="btn">Register</button>
         </form>
         <a href="signin.html" class="link">Already have an account?</a>
-        <a href="index.html" class="back">← Back to Home</a>
+        <a href="index.html" class="back-btn">← Back to Home</a>
     </div>
 </body>
+<script>
+    function signup(event) {
+        event.preventDefault();
+        
+        let fullName = document.getElementById("fullName").value;
+        let email = document.getElementById("email").value;
+        let password = document.getElementById("password").value;
+
+        if (localStorage.getItem(email)) {
+            alert("Account already exists! Please sign in.");
+        } else {
+            localStorage.setItem(email, JSON.stringify({ fullName, email, password }));
+            alert("Account created successfully! Please sign in.");
+            window.location.href = "signin.html";
+        }
+    }
+</script>
 </html>

@@ -56,3 +56,14 @@ input {
     text-decoration: none;
     color: blue;
 }
+
+/* Logout button */
+.logout-btn {
+    background-color: red;
+    margin-top: 20px;
+}
+
+.logout-btn:hover {
+    background-color: darkred;
+}
+
